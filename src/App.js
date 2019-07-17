@@ -9,12 +9,7 @@ import Home from "./components/home";
 import ErrorPage from "./components/errorpage";
 class App extends Component {
   state = {
-    counters: [
-      { id: uuid(), value: 0 },
-      { id: uuid(), value: 0 },
-      { id: uuid(), value: 0 },
-      { id: uuid(), value: 0 }
-    ],
+    //items: [{ id: uuid(), value: 0 }]
     items: []
   };
   constructor() {
@@ -29,34 +24,48 @@ class App extends Component {
     const fetchItems = this.fetchFortniteApi();
     fetchItems();
   }
-  handleDecrement = counter => {
-    const { counters, index } = this.getCurrentCounter(counter); //counter is shown in the Counter component
-    counters[index].value =
-      counters[index].value === 0 ? 0 : counters[index].value - 1;
-    this.setState({ counters });
-    console.log("handleDecrement", counter);
+  handleDecrement = item => {
+    const { items, index } = this.getCurrentCounter(item); //item is shown in the Counter component
+    items[index].value = items[index].value === 0 ? 0 : items[index].value - 1;
+    this.setState({ items });
+    console.log("handleDecrement", item);
   };
-  handleIncrement = counter => {
-    const { counters, index } = this.getCurrentCounter(counter); //counter is shown in the Counter component
-    counters[index].value++;
-    this.setState({ counters });
-    console.log("handleIncrement", counter);
+  handleIncrement = item => {
+    const { items, index } = this.getCurrentCounter(item); //item is shown in the Counter component
+    console.log("handleIncrement: items", items);
+    items[index].value++;
+    this.setState({ items });
+    console.log("handleIncrement", item);
   };
-  handleDelete = counterId => {
-    const counters = this.state.counters.filter(c => c.id !== counterId);
-    this.setState({ counters });
+  handleDelete = itemId => {
+    const items = this.state.items.filter(c => c.id !== itemId);
+    this.setState({ items });
   };
   handleAdd = () => {
-    const counters = [...this.state.counters];
-    counters.push({ id: uuid(), value: 0 });
-    this.setState({ counters });
+    const items = [...this.state.items];
+    items.push({ id: uuid(), value: 0 });
+    this.setState({ items });
   };
   handleReset = () => {
-    const counters = this.state.counters.map(c => {
+    const items = this.state.items.map(c => {
       c.value = 0;
       return c;
     });
-    this.setState({ counters });
+    this.setState({ items });
+  };
+  setItemsState = (inputItems, apiType = "fortnite") => {
+    let items = [...this.state.items];
+    if (apiType == "fortnite") {
+      for (const i in inputItems) {
+        items.push({
+          id: uuid(),
+          value: 0,
+          name: inputItems[i].item.name,
+          type: inputItems[i].item.type
+        });
+      }
+    }
+    this.setState({ items });
   };
   fetchFortniteApi() {
     return async () => {
@@ -65,17 +74,16 @@ class App extends Component {
           process.env.REACT_APP_API_KEY
         }`
       );
-      const items = await data.json();
-      console.log(items);
-      this.setState({ items });
+      const fortniteItems = await data.json();
+      this.setItemsState(fortniteItems.data);
     };
   }
 
-  getCurrentCounter(counter) {
-    const counters = [...this.state.counters];
-    const index = counters.indexOf(counter);
-    counters[index] = { ...counter }; //counter is shown in the Counter component
-    return { counters, index };
+  getCurrentCounter(item) {
+    const items = [...this.state.items];
+    const index = items.indexOf(item);
+    items[index] = { ...items[index] }; //item is shown in the Counter component
+    return { items, index };
   }
 
   render() {
@@ -92,9 +100,9 @@ class App extends Component {
                 render={() => (
                   <Counters
                     totalCounters={
-                      this.state.counters.filter(c => c.value > 0).length
+                      this.state.items.filter(c => c.value > 0).length
                     }
-                    totalValues={this.state.counters
+                    totalValues={this.state.items
                       .map(c => {
                         return c.value;
                       })
@@ -103,7 +111,7 @@ class App extends Component {
                           previousValue + currentValue,
                         0
                       )}
-                    counters={this.state.counters}
+                    items={this.state.items}
                     onReset={this.handleReset}
                     onDelete={this.handleDelete}
                     onAdd={this.handleAdd}
