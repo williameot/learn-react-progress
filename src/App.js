@@ -43,7 +43,7 @@ class App extends Component {
   };
   handleAdd = () => {
     const items = [...this.state.items];
-    items.push({ id: uuid(), value: 0 });
+    items.push({ id: uuid(), value: 0, name: "new item", type: "new type" });
     this.setState({ items });
   };
   handleReset = () => {
