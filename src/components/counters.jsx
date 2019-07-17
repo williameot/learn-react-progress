@@ -46,7 +46,7 @@ class Counters extends Component {
             </div>
           </Counter>
         ))}
-        <AddCounterModal onAdd={this.props.onAdd} />
+        <AddCounterModal onAddModal={this.props.onAddModal} />
       </div>
     );
   }

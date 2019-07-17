@@ -46,6 +46,12 @@ class App extends Component {
     items.push({ id: uuid(), value: 0, name: "new item", type: "new type" });
     this.setState({ items });
   };
+  handleAddModal = (nameValue, typeValue) => {
+    console.log("handleAddModal", nameValue);
+    const items = [...this.state.items];
+    items.push({ id: uuid(), value: 0, name: nameValue, type: typeValue });
+    this.setState({ items });
+  };
   handleReset = () => {
     const items = this.state.items.map(c => {
       c.value = 0;
@@ -55,7 +61,7 @@ class App extends Component {
   };
   setItemsState = (inputItems, apiType = "fortnite") => {
     let items = [...this.state.items];
-    if (apiType == "fortnite") {
+    if (apiType === "fortnite") {
       for (const i in inputItems) {
         items.push({
           id: uuid(),
@@ -115,6 +121,7 @@ class App extends Component {
                     onReset={this.handleReset}
                     onDelete={this.handleDelete}
                     onAdd={this.handleAdd}
+                    onAddModal={this.handleAddModal}
                     onIncrement={this.handleIncrement}
                     onDecrement={this.handleDecrement}
                   />
