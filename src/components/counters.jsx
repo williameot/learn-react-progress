@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Counter from "./counter";
+import AddCounterModal from "./addcountermodal";
 class Counters extends Component {
   render() {
     console.log("Counters - Rendered");
@@ -16,6 +17,14 @@ class Counters extends Component {
           onClick={this.props.onAdd}
         >
           Add Counter
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          data-toggle="modal"
+          data-target="#addCounterModal"
+        >
+          Add Counter Modal
         </button>
         <span className="badge badge-pill badge-secondary m-2">
           Total Counters: {this.props.totalCounters}
@@ -37,6 +46,7 @@ class Counters extends Component {
             </div>
           </Counter>
         ))}
+        <AddCounterModal onAdd={this.props.onAdd} />
       </div>
     );
   }
