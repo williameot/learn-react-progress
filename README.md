@@ -6,8 +6,16 @@ In the project directory, you can run the following command to install the packa
 
 ### `npm install`
 
-Page(s) that require api access will need to utilize .env in the root directory.
+## Environment Variables
+
+Some environment variables such as api keys are stored in the .env file.<br>
+Example: Page(s) that require api access will need to utilize .env in the root directory.<br>
 A sample env file, env-sample.txt, is stored in the root directory for reference.
+
+## API Keys Instruction
+
+1. Sign up to get an api key from https://fortniteapi.com/
+2. Input the api key as shown in the env-sample.txt file
 
 ## Available Scripts
 
