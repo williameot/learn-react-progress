@@ -16,12 +16,7 @@ class App extends Component {
       { id: uuid(), value: 0, name: "Mesh Chair", type: "Office Furniture" }
     ]
   };
-  constructor() {
-    //Used to initialize properties of this class
-    super();
-    this.setState({ api: false });
-    //this.state = this.props.something  can only work in constructor
-  }
+
   componentDidMount() {
     //api call
     const fetchItems = this.fetchFortniteApi();
