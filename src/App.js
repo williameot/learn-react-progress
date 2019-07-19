@@ -10,17 +10,20 @@ import ErrorPage from "./components/errorpage";
 class App extends Component {
   state = {
     //items: [{ id: uuid(), value: 0 }]
-    items: []
+    items: [
+      { id: uuid(), value: 0, name: "Pork chop", type: "Food" },
+      { id: uuid(), value: 0, name: "Salad", type: "Food" },
+      { id: uuid(), value: 0, name: "Mesh Chair", type: "Office Furniture" }
+    ]
   };
   constructor() {
     //Used to initialize properties of this class
     super();
-    console.log("App - Constructor");
+    this.setState({ api: false });
     //this.state = this.props.something  can only work in constructor
   }
   componentDidMount() {
     //api call
-    console.log("component did mount call");
     const fetchItems = this.fetchFortniteApi();
     fetchItems();
   }
@@ -28,14 +31,11 @@ class App extends Component {
     const { items, index } = this.getCurrentCounter(item); //item is shown in the Counter component
     items[index].value = items[index].value === 0 ? 0 : items[index].value - 1;
     this.setState({ items });
-    console.log("handleDecrement", item);
   };
   handleIncrement = item => {
     const { items, index } = this.getCurrentCounter(item); //item is shown in the Counter component
-    console.log("handleIncrement: items", items);
     items[index].value++;
     this.setState({ items });
-    console.log("handleIncrement", item);
   };
   handleDelete = itemId => {
     const items = this.state.items.filter(c => c.id !== itemId);
@@ -47,7 +47,6 @@ class App extends Component {
     this.setState({ items });
   };
   handleAddModal = (nameValue, typeValue) => {
-    console.log("handleAddModal", nameValue);
     const items = [...this.state.items];
     items.push({ id: uuid(), value: 0, name: nameValue, type: typeValue });
     this.setState({ items });
@@ -60,18 +59,23 @@ class App extends Component {
     this.setState({ items });
   };
   setItemsState = (inputItems, apiType = "fortnite") => {
-    let items = [...this.state.items];
-    if (apiType === "fortnite") {
-      for (const i in inputItems) {
-        items.push({
-          id: uuid(),
-          value: 0,
-          name: inputItems[i].item.name,
-          type: inputItems[i].item.type
-        });
+    //check if input items exist before set state
+    if (inputItems.length > 0) {
+      //let items = [...this.state.items];
+      //replace existing items with items from api
+      let items = [];
+      if (apiType === "fortnite") {
+        for (const i in inputItems) {
+          items.push({
+            id: uuid(),
+            value: 0,
+            name: inputItems[i].item.name,
+            type: inputItems[i].item.type
+          });
+        }
       }
+      this.setState({ items: items });
     }
-    this.setState({ items });
   };
   fetchFortniteApi() {
     return async () => {
@@ -80,8 +84,11 @@ class App extends Component {
           process.env.REACT_APP_API_KEY
         }`
       );
-      const fortniteItems = await data.json();
-      this.setItemsState(fortniteItems.data);
+      //case check
+      if (data.status === 200) {
+        const fortniteItems = await data.json();
+        this.setItemsState(fortniteItems.data);
+      }
     };
   }
 
@@ -93,7 +100,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("App - Rendered");
     return (
       <Fragment>
         <Router>

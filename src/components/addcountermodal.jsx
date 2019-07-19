@@ -40,7 +40,7 @@ class AddCounterModal extends Component {
           onHide={this.handleClose}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Add Counter</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <InputGroup className="mb-3">
@@ -76,10 +76,10 @@ class AddCounterModal extends Component {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
-              Close
+              Cancel
             </Button>
             <Button variant="primary" onClick={this.handleSubmit}>
-              Add Counter
+              Add
             </Button>
           </Modal.Footer>
         </Modal>

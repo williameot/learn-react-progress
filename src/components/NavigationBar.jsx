@@ -2,7 +2,6 @@ import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 //Stateless Functional Component
 const NavigationBar = ({ totalCounters }) => {
-  console.log("NavigationBar - Rendered");
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
       <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>

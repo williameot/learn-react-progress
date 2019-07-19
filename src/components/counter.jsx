@@ -6,15 +6,14 @@ class Counter extends Component {
     fontWeight: "bold"
   };
   componentDidUpdate(prevProps, prevState) {
-    console.log("previous prop ", prevProps);
-    console.log("previous state ", prevState);
+    //console.log("previous prop ", prevProps);
+    //console.log("previous state ", prevState);
     if (prevProps.item.value !== this.props.item.value) {
       //call ajax function
     }
   }
   componentWillUnmount(prevProps, prevState) {
-    console.log("counter - Unmount");
-    //you may use remove timers and cache to save memory
+    //remove timers and cache to save memory
   }
   // constructor() {
   //   super();
@@ -29,7 +28,6 @@ class Counter extends Component {
   render() {
     const { item, onDelete, onIncrement, onDecrement, children } = this.props;
     let classes = this.getBadgeClasses();
-    console.log("Counter - rendered");
     return (
       <div>
         {children}
