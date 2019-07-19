@@ -1,96 +1,89 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import { Modal, Button, FormControl, InputGroup } from "react-bootstrap";
 class AddCounterModal extends Component {
-  state = {};
-  constructor(props) {
-    super(props);
-    this.state = { nameValue: "", typeValue: "" };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  constructor() {
+    super();
+    this.state = { show: false, nameValue: "", typeValue: "" };
+    //this.handleClose = this.handleClose.bind(this);
+    //this.handleShow = this.handleShow.bind(this);
+    //this.handleInputChange = this.handleInputChange.bind(this);
   }
-  handleInputChange(event) {
+  handleClose = () => {
+    this.setState({ show: false });
+  };
+
+  handleShow = () => {
+    this.setState({ show: true });
+  };
+  handleInputChange = event => {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
     this.setState({
       [name]: value
     });
-  }
-  handleSubmit(event) {
+  };
+  handleSubmit = event => {
     this.props.onAddModal(this.state.nameValue, this.state.typeValue);
+    this.handleClose();
     event.preventDefault();
-    //onClick={() => onDecrement(item)}
-  }
+  };
   render() {
     return (
-      <div
-        className="modal fade"
-        id="addCounterModal"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="addCounterModalLabel"
-        aria-hidden="true"
-      >
-        <form>
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="addCounterModalLabel">
-                  Modal title
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <div className="form-group">
-                  <label htmlFor="nameValue">Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="nameValue"
-                    name="nameValue"
-                    placeholder="Name"
-                    value={this.state.nameValue}
-                    onChange={this.handleInputChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="typeValue">Type</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="typeValue"
-                    name="typeValue"
-                    placeholder="Type"
-                    value={this.state.typeValue}
-                    onChange={this.handleInputChange}
-                  />
-                </div>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <input
-                  type="submit"
-                  className="btn btn-primary"
-                  value="Add Counter"
-                  onClick={this.handleSubmit}
-                />
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
+      <Fragment>
+        <Button variant="primary" onClick={this.handleShow}>
+          Add Counter
+        </Button>
+        <Modal
+          id="addCounterModal"
+          show={this.state.show}
+          onHide={this.handleClose}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Text id="inputGroup-sizing-default">
+                  Name
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                aria-label="Default"
+                aria-describedby="inputGroup-sizing-default"
+                id="nameValue"
+                name="nameValue"
+                value={this.state.nameValue}
+                onChange={this.handleInputChange}
+              />
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Text id="inputGroup-sizing-default">
+                  Type
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                aria-label="Default"
+                aria-describedby="inputGroup-sizing-default"
+                id="typeValue"
+                name="typeValue"
+                value={this.state.typeValue}
+                onChange={this.handleInputChange}
+              />
+            </InputGroup>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={this.handleSubmit}>
+              Add Counter
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </Fragment>
     );
   }
 }

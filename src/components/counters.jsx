@@ -12,20 +12,7 @@ class Counters extends Component {
         >
           Reset
         </button>
-        <button
-          className="btn btn-secondary btn-small m-2"
-          onClick={this.props.onAdd}
-        >
-          Add Counter
-        </button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          data-toggle="modal"
-          data-target="#addCounterModal"
-        >
-          Add Counter Modal
-        </button>
+        <AddCounterModal onAddModal={this.props.onAddModal} />
         <span className="badge badge-pill badge-secondary m-2">
           Total Counters: {this.props.totalCounters}
         </span>
@@ -46,7 +33,6 @@ class Counters extends Component {
             </div>
           </Counter>
         ))}
-        <AddCounterModal onAddModal={this.props.onAddModal} />
       </div>
     );
   }

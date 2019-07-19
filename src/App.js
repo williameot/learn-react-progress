@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 //import logo from "./logo.svg";
-import NavBar from "./components/navbar";
+import NavigationBar from "./components/NavigationBar";
 import Counters from "./components/counters";
 import uuid from "uuid/v4";
 import "./App.css";
@@ -97,7 +97,7 @@ class App extends Component {
     return (
       <Fragment>
         <Router>
-          <NavBar />
+          <NavigationBar />
           <main className="container">
             <Switch>
               <Route exact path="/" component={Home} />
