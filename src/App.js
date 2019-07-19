@@ -74,15 +74,17 @@ class App extends Component {
   };
   fetchFortniteApi() {
     return async () => {
-      const data = await fetch(
-        `https://fortnite-api.theapinetwork.com/store/get?authorization=${
-          process.env.REACT_APP_API_KEY
-        }`
-      );
-      //case check
-      if (data.status === 200) {
-        const fortniteItems = await data.json();
-        this.setItemsState(fortniteItems.data);
+      if (process.env.REACT_APP_API_KEY !== undefined) {
+        const data = await fetch(
+          `https://fortnite-api.theapinetwork.com/store/get?authorization=${
+            process.env.REACT_APP_API_KEY
+          }`
+        );
+        //case check
+        if (data.status === 200) {
+          const fortniteItems = await data.json();
+          this.setItemsState(fortniteItems.data);
+        }
       }
     };
   }
