@@ -4,7 +4,7 @@ import { Navbar, Nav } from "react-bootstrap";
 const NavigationBar = ({ totalCounters }) => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
-      <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+      <Navbar.Brand href="/">William Wong's Portfolio</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
