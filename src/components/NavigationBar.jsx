@@ -9,7 +9,8 @@ const NavigationBar = ({ totalCounters }) => {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/counter">Counter Page</Nav.Link>
+          <Nav.Link href="/counter">Shopping Cart Page</Nav.Link>
+          <Nav.Link href="http://www.hiteagames.com">Game Page</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

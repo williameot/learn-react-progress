@@ -32,7 +32,7 @@ class AddCounterModal extends Component {
     return (
       <Fragment>
         <Button variant="primary" onClick={this.handleShow}>
-          Add Counter
+          Add Item
         </Button>
         <Modal
           id="addCounterModal"
@@ -40,7 +40,7 @@ class AddCounterModal extends Component {
           onHide={this.handleClose}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Add Counter</Modal.Title>
+            <Modal.Title>Add Item</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <InputGroup className="mb-3">

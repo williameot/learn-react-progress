@@ -11,9 +11,15 @@ class App extends Component {
   state = {
     //items: [{ id: uuid(), value: 0 }]
     items: [
-      { id: uuid(), value: 0, name: "Pork chop", type: "Food" },
-      { id: uuid(), value: 0, name: "Salad", type: "Food" },
-      { id: uuid(), value: 0, name: "Mesh Chair", type: "Office Furniture" }
+      { id: uuid(), value: 0, name: "Pork chop", type: "Food", price: 100 },
+      { id: uuid(), value: 0, name: "Salad", type: "Food", price: 90 },
+      {
+        id: uuid(),
+        value: 0,
+        name: "Mesh Chair",
+        type: "Office Furniture",
+        price: 5699
+      }
     ]
   };
 
@@ -38,12 +44,12 @@ class App extends Component {
   };
   handleAdd = () => {
     const items = [...this.state.items];
-    items.push({ id: uuid(), value: 0, name: "new item", type: "new type" });
+    items.unshift({ id: uuid(), value: 0, name: "new item", type: "new type" });
     this.setState({ items });
   };
   handleAddModal = (nameValue, typeValue) => {
     const items = [...this.state.items];
-    items.push({ id: uuid(), value: 0, name: nameValue, type: typeValue });
+    items.unshift({ id: uuid(), value: 0, name: nameValue, type: typeValue });
     this.setState({ items });
   };
   handleReset = () => {
@@ -58,6 +64,7 @@ class App extends Component {
     if (inputItems.length > 0) {
       //let items = [...this.state.items];
       //replace existing items with items from api
+
       let items = [];
       if (apiType === "fortnite") {
         for (const i in inputItems) {
@@ -65,7 +72,8 @@ class App extends Component {
             id: uuid(),
             value: 0,
             name: inputItems[i].item.name,
-            type: inputItems[i].item.type
+            type: inputItems[i].item.type,
+            price: inputItems[i].store.cost
           });
         }
       }
