@@ -3,7 +3,7 @@ import { Modal, Button, FormControl, InputGroup } from "react-bootstrap";
 class AddCounterModal extends Component {
   constructor() {
     super();
-    this.state = { show: false, nameValue: "", typeValue: "" };
+    this.state = { show: false, nameValue: "", typeValue: "", priceValue: "" };
     //this.handleClose = this.handleClose.bind(this);
     //this.handleShow = this.handleShow.bind(this);
     //this.handleInputChange = this.handleInputChange.bind(this);
@@ -24,7 +24,11 @@ class AddCounterModal extends Component {
     });
   };
   handleSubmit = event => {
-    this.props.onAddModal(this.state.nameValue, this.state.typeValue);
+    this.props.onAddModal(
+      this.state.nameValue,
+      this.state.typeValue,
+      this.state.priceValue
+    );
     this.handleClose();
     event.preventDefault();
   };
@@ -70,6 +74,21 @@ class AddCounterModal extends Component {
                 id="typeValue"
                 name="typeValue"
                 value={this.state.typeValue}
+                onChange={this.handleInputChange}
+              />
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Text id="inputGroup-sizing-default">
+                  Price
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                aria-label="Default"
+                aria-describedby="inputGroup-sizing-default"
+                id="priceValue"
+                name="priceValue"
+                value={this.state.priceValue}
                 onChange={this.handleInputChange}
               />
             </InputGroup>

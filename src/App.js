@@ -47,9 +47,15 @@ class App extends Component {
     items.unshift({ id: uuid(), value: 0, name: "new item", type: "new type" });
     this.setState({ items });
   };
-  handleAddModal = (nameValue, typeValue) => {
+  handleAddModal = (nameValue, typeValue, priceValue) => {
     const items = [...this.state.items];
-    items.unshift({ id: uuid(), value: 0, name: nameValue, type: typeValue });
+    items.unshift({
+      id: uuid(),
+      value: 0,
+      name: nameValue,
+      type: typeValue,
+      price: priceValue
+    });
     this.setState({ items });
   };
   handleReset = () => {
@@ -73,7 +79,7 @@ class App extends Component {
             value: 0,
             name: inputItems[i].item.name,
             type: inputItems[i].item.type,
-            price: inputItems[i].store.cost
+            price: parseInt(inputItems[i].store.cost, 10)
           });
         }
       }
@@ -116,16 +122,25 @@ class App extends Component {
                 path="/counter"
                 render={() => (
                   <Counters
-                    totalCounters={
+                    totalCounter={
                       this.state.items.filter(c => c.value > 0).length
                     }
-                    totalValues={this.state.items
+                    totalValue={this.state.items
                       .map(c => {
                         return c.value;
                       })
                       .reduce(
                         (previousValue, currentValue) =>
                           previousValue + currentValue,
+                        0
+                      )}
+                    totalPrice={this.state.items
+                      .map(c => {
+                        return c.value * c.price;
+                      })
+                      .reduce(
+                        (previousPrice, currentPrice) =>
+                          previousPrice + currentPrice,
                         0
                       )}
                     items={this.state.items}

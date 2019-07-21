@@ -43,10 +43,13 @@ class Counters extends Component {
     return (
       <div>
         <span className="badge badge-pill badge-secondary m-2">
-          Items: {this.props.totalCounters}
+          Items: {this.props.totalCounter}
         </span>
         <span className="badge badge-pill badge-secondary m-2">
-          Increments: {this.props.totalValues}
+          Increments: {this.props.totalValue}
+        </span>
+        <span className="badge badge-pill badge-secondary m-2">
+          Cost: {this.props.totalPrice}
         </span>
       </div>
     );
