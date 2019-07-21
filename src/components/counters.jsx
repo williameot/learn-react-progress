@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import Counter from "./counter";
 import AddCounterModal from "./addcountermodal";
 import { ButtonGroup, Button, Card, CardGroup } from "react-bootstrap";
-import "holderjs";
 class Counters extends Component {
   createCounter = item => {
     return (
