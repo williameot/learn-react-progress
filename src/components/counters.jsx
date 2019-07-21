@@ -1,8 +1,31 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Counter from "./counter";
 import AddCounterModal from "./addcountermodal";
-import { ButtonGroup, Button, Container, Row, Col } from "react-bootstrap";
+import { ButtonGroup, Button, Card, CardGroup } from "react-bootstrap";
+import "holderjs";
 class Counters extends Component {
+  createCounter = item => {
+    return (
+      <Counter
+        item={item}
+        onDelete={this.props.onDelete}
+        onIncrement={this.props.onIncrement}
+        onDecrement={this.props.onDecrement}
+      >
+        <Card.Img variant="top" src="https://via.placeholder.com/300x100" />
+        <Card.Body>
+          <Card.Title>{item.name}</Card.Title>
+          <Card.Text>
+            Type: {item.type}
+            <br /> Price: {item.price}
+          </Card.Text>
+        </Card.Body>
+      </Counter>
+    );
+  };
+  createCard = item => {
+    return <Card key={item.id}>{this.createCounter(item)}</Card>;
+  };
   createGrid = () => {
     let grid = [];
     let totalCounters = this.props.items.length;
@@ -15,29 +38,13 @@ class Counters extends Component {
       for (let j = 0; j < totalColumns; j++) {
         if (currentIndex < totalCounters) {
           item = this.props.items[currentIndex];
-          columnGrid.push(
-            <Col sm={12} lg={4}>
-              <Counter
-                key={item.id}
-                item={item}
-                onDelete={this.props.onDelete}
-                onIncrement={this.props.onIncrement}
-                onDecrement={this.props.onDecrement}
-              >
-                <div>
-                  <span className="m-2">Name: {item.name}</span>
-                  <span>Type: {item.type}</span>
-                  <span className="m-2">Price: {item.price}</span>
-                </div>
-              </Counter>
-            </Col>
-          );
+          columnGrid.push(this.createCard(item));
           currentIndex += 1;
         }
       }
-      grid.push(<Row>{columnGrid}</Row>);
+      grid.push(<CardGroup key={item.id}>{columnGrid}</CardGroup>);
     }
-    return <Container>{grid}</Container>;
+    return <Fragment>{grid}</Fragment>;
   };
   createCart = () => {
     return (
@@ -67,6 +74,10 @@ class Counters extends Component {
   render() {
     return (
       <div>
+        <div>
+          SVG placeholder is used in this{" "}
+          <a href="https://placeholder.com">page</a>: https://placeholder.com
+        </div>
         {this.createCounterOptions()}
         {this.createCart()}
         {this.createGrid()}
