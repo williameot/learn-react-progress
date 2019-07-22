@@ -12,7 +12,7 @@ class Counters extends Component {
         onDecrement={this.props.onDecrement}
       >
         <Card.Img variant="top" src="https://via.placeholder.com/300x100" />
-        <Card.Body>
+        <Card.Body style={{ margin: 0, padding: 0 }}>
           <Card.Title>{item.name}</Card.Title>
           <Card.Text>
             Type: {item.type}
