@@ -70,13 +70,18 @@ class Counters extends Component {
       </ButtonGroup>
     );
   };
+  createBriefDescription = () => {
+    return (
+      <div>
+        This page uses SVG placeholder:{" "}
+        <a href="https://placeholder.com">https://placeholder.com</a>
+      </div>
+    );
+  };
   render() {
     return (
       <div>
-        <div>
-          SVG placeholder is used in this{" "}
-          <a href="https://placeholder.com">page</a>: https://placeholder.com
-        </div>
+        {this.createBriefDescription()}
         {this.createCounterOptions()}
         {this.createCart()}
         {this.createGrid()}
