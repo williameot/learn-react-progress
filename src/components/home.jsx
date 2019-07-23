@@ -12,7 +12,9 @@ class Home extends Component {
         </p>
         <p>
           Source codes can be found in the Git page:
-          https://github.com/williameot/learn-react-progress
+          <a href="https://github.com/williameot/learn-react-progress">
+            https://github.com/williameot/learn-react-progress
+          </a>
         </p>
       </Fragment>
     );
