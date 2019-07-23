@@ -1,7 +1,15 @@
 import React, { Component, Fragment } from "react";
 import Counter from "./counter";
 import AddCounterModal from "./addcountermodal";
-import { ButtonGroup, Button, Card, CardGroup } from "react-bootstrap";
+import {
+  ButtonToolbar,
+  ButtonGroup,
+  Button,
+  Card,
+  CardGroup,
+  Popover,
+  OverlayTrigger
+} from "react-bootstrap";
 class Counters extends Component {
   createCounter = item => {
     return (
@@ -62,12 +70,15 @@ class Counters extends Component {
   };
   createCounterOptions = () => {
     return (
-      <ButtonGroup>
-        <Button variant="primary" onClick={this.props.onReset}>
-          Reset
-        </Button>
-        <AddCounterModal onAddModal={this.props.onAddModal} />
-      </ButtonGroup>
+      <ButtonToolbar className="justify-content-between">
+        <ButtonGroup>
+          <Button variant="primary" onClick={this.props.onReset}>
+            Reset
+          </Button>
+          <AddCounterModal onAddModal={this.props.onAddModal} />
+        </ButtonGroup>
+        {this.createShoppingCartPopOver()}
+      </ButtonToolbar>
     );
   };
   createBriefDescription = () => {
@@ -76,6 +87,29 @@ class Counters extends Component {
         This page uses SVG placeholder:{" "}
         <a href="https://placeholder.com">https://placeholder.com</a>
       </div>
+    );
+  };
+  createShoppingCartPopOver = () => {
+    const popover = (
+      <Popover
+        title={
+          <Fragment>
+            {this.props.totalValue} | Total: {this.props.totalPrice}
+          </Fragment>
+        }
+      >
+        cart items go here
+      </Popover>
+    );
+    return (
+      <OverlayTrigger
+        trigger="click"
+        rootClose
+        placement="bottom"
+        overlay={popover}
+      >
+        <Button variant="success">Cart</Button>
+      </OverlayTrigger>
     );
   };
   render() {
