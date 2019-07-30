@@ -70,7 +70,7 @@ class Counters extends Component {
   };
   createCounterOptions = () => {
     return (
-      <ButtonToolbar className="justify-content-between">
+      <ButtonToolbar className="justify-content-between sticky-top bg-white">
         <ButtonGroup>
           <Button variant="primary" onClick={this.props.onReset}>
             Reset
