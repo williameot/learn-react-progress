@@ -22,7 +22,7 @@
     "gulp-sass": "^4.0.2"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"gulp watch\"",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
