@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Counter from "./counter";
 import AddCounterModal from "./addcountermodal";
+import { IoIosCart } from "react-icons/io";
 import {
   ButtonToolbar,
   ButtonGroup,
@@ -8,7 +9,13 @@ import {
   Card,
   CardGroup,
   Popover,
-  OverlayTrigger
+  OverlayTrigger,
+  Table,
+  thead,
+  tr,
+  th,
+  tbody,
+  td
 } from "react-bootstrap";
 class Counters extends Component {
   createCounter = item => {
@@ -54,6 +61,46 @@ class Counters extends Component {
     return <Fragment>{grid}</Fragment>;
   };
   createCart = () => {
+    //build a table to store list of cart items
+    let descriptionTable = [];
+    let totalCounters = this.props.items.length;
+    let totalColumns = 3;
+    let totalRows = Math.ceil(totalCounters / totalColumns);
+    let currentIndex = 0;
+    let item = {};
+    for (let i = 0; i < this.props.items.length; i++) {
+      item = this.props.items[i];
+      if (item.value > 0) {
+        descriptionTable.push(this.createCartItemRow(item));
+      }
+    }
+    if (descriptionTable.length === 0) {
+      return <Fragment>Cart is empty</Fragment>;
+    }
+    return (
+      <Table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>{descriptionTable}</tbody>
+      </Table>
+    );
+  };
+  createCartItemRow = item => {
+    return (
+      <tr>
+        <td>{item.name}</td>
+        <td>{item.value}</td>
+        <td>{item.value * item.price}</td>
+      </tr>
+    );
+  };
+  /*
+  createCart = () => {
     return (
       <div>
         <span className="badge badge-pill badge-secondary m-2">
@@ -68,6 +115,7 @@ class Counters extends Component {
       </div>
     );
   };
+  */
   createCounterOptions = () => {
     return (
       <ButtonToolbar className="justify-content-between sticky-top bg-white">
@@ -98,7 +146,7 @@ class Counters extends Component {
           </Fragment>
         }
       >
-        cart items go here
+        {this.createCart()}
       </Popover>
     );
     return (
@@ -108,7 +156,9 @@ class Counters extends Component {
         placement="bottom"
         overlay={popover}
       >
-        <Button variant="success">Cart</Button>
+        <Button variant="info outline-*">
+          <IoIosCart /> Cart
+        </Button>
       </OverlayTrigger>
     );
   };
@@ -117,7 +167,6 @@ class Counters extends Component {
       <div>
         {this.createBriefDescription()}
         {this.createCounterOptions()}
-        {this.createCart()}
         {this.createGrid()}
       </div>
     );
