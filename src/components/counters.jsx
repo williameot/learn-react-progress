@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Counter from "./counter";
 import AddCounterModal from "./addcountermodal";
-import { IoIosCart } from "react-icons/io";
+import { IoIosCart, IoIosRemoveCircleOutline } from "react-icons/io";
 import {
   ButtonToolbar,
   ButtonGroup,
@@ -78,12 +78,13 @@ class Counters extends Component {
       return <Fragment>Cart is empty</Fragment>;
     }
     return (
-      <Table>
+      <Table responsive size="sm">
         <thead>
           <tr>
             <th>Name</th>
             <th>Quantity</th>
             <th>Total</th>
+            <th>Remove</th>
           </tr>
         </thead>
         <tbody>{descriptionTable}</tbody>
@@ -96,6 +97,14 @@ class Counters extends Component {
         <td>{item.name}</td>
         <td>{item.value}</td>
         <td>{item.value * item.price}</td>
+        <td>
+          <Button
+            variant="danger"
+            onClick={() => this.props.onResetItem(item.id)}
+          >
+            <IoIosRemoveCircleOutline />
+          </Button>
+        </td>
       </tr>
     );
   };

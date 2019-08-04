@@ -65,6 +65,15 @@ class App extends Component {
     });
     this.setState({ items });
   };
+  handleResetItem = itemId => {
+    const items = this.state.items.map(c => {
+      if (c.id === itemId) {
+        c.value = 0;
+      }
+      return c;
+    });
+    this.setState({ items });
+  };
   setItemsState = (inputItems, apiType = "fortnite") => {
     //check if input items exist before set state
     if (inputItems.length > 0) {
@@ -145,6 +154,7 @@ class App extends Component {
                       )}
                     items={this.state.items}
                     onReset={this.handleReset}
+                    onResetItem={this.handleResetItem}
                     onDelete={this.handleDelete}
                     onAdd={this.handleAdd}
                     onAddModal={this.handleAddModal}
