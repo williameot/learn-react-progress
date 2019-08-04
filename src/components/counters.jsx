@@ -63,10 +63,6 @@ class Counters extends Component {
   createCart = () => {
     //build a table to store list of cart items
     let descriptionTable = [];
-    let totalCounters = this.props.items.length;
-    let totalColumns = 3;
-    let totalRows = Math.ceil(totalCounters / totalColumns);
-    let currentIndex = 0;
     let item = {};
     for (let i = 0; i < this.props.items.length; i++) {
       item = this.props.items[i];
@@ -108,23 +104,7 @@ class Counters extends Component {
       </tr>
     );
   };
-  /*
-  createCart = () => {
-    return (
-      <div>
-        <span className="badge badge-pill badge-secondary m-2">
-          Items: {this.props.totalCounter}
-        </span>
-        <span className="badge badge-pill badge-secondary m-2">
-          Increments: {this.props.totalValue}
-        </span>
-        <span className="badge badge-pill badge-secondary m-2">
-          Cost: {this.props.totalPrice}
-        </span>
-      </div>
-    );
-  };
-  */
+
   createCounterOptions = () => {
     return (
       <ButtonToolbar className="justify-content-between sticky-top bg-white">
